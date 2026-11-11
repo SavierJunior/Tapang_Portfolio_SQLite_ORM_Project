@@ -1,0 +1,59 @@
+.achievements__list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.achievements__list li {
+  display: flex;
+}
+
+.achievements__list li > .reveal {
+  width: 100%;
+}
+
+.achievement {
+  position: relative;
+  height: 100%;
+  padding: 34px 30px 36px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-top: 2px solid var(--purple);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  transition: border-color 0.3s ease, background 0.3s ease, opacity 0.7s ease;
+}
+
+.achievement:hover {
+  border-color: rgba(133, 87, 255, 0.5);
+  border-top-color: var(--cyan);
+  background: linear-gradient(170deg, rgba(133, 87, 255, 0.12), var(--surface) 60%);
+}
+
+.achievement__number {
+  display: block;
+  margin-bottom: 26px;
+  color: var(--violet);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.achievement h3 {
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+
+.achievement p {
+  margin-top: 12px;
+  color: var(--muted);
+}
+
+@media (max-width: 960px) {
+  .achievements__list {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,357 @@
+.sis {
+  padding-top: calc(var(--nav-height) + 64px);
+  min-height: 80vh;
+}
+
+.sis__header {
+  margin-bottom: 44px;
+}
+
+.sis__header .section-title {
+  font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+}
+
+.sis__intro {
+  max-width: 60ch;
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 1.05rem;
+}
+
+.sis-dashboard {
+  display: grid;
+  gap: 22px;
+}
+
+/* ----- Stats ----- */
+.sis-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.sis-stats > div {
+  padding: 22px 26px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+}
+
+.sis-stats dt {
+  color: var(--faint);
+  font-size: 0.85rem;
+}
+
+.sis-stats dd {
+  margin-top: 6px;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.sis-stats dd.is-small {
+  padding-top: 10px;
+  font-size: 1.3rem;
+}
+
+/* ----- Layout ----- */
+.sis-layout {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.sis-card {
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+.sis-card h3 {
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  letter-spacing: -0.02em;
+}
+
+.sis-card__hint {
+  margin-top: 4px;
+  color: var(--faint);
+  font-size: 0.9rem;
+}
+
+.sis-form {
+  position: sticky;
+  top: calc(var(--nav-height) + 16px);
+  display: grid;
+  gap: 18px;
+}
+
+.sis-form .btn {
+  width: 100%;
+}
+
+/* ----- Records ----- */
+.sis-records__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.sis-search {
+  display: grid;
+  gap: 6px;
+  width: min(100%, 320px);
+}
+
+.sis-search label {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.sis-search__box {
+  position: relative;
+}
+
+.sis-search input {
+  width: 100%;
+  padding: 11px 40px 11px 14px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.035);
+  color: #fff;
+}
+
+.sis-search input::placeholder {
+  color: #6f6f89;
+}
+
+.sis-search input:focus {
+  outline: none;
+  border-color: var(--purple);
+  box-shadow: 0 0 0 3px rgba(133, 87, 255, 0.25);
+}
+
+.sis-search__box button {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  transform: translateY(-50%);
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted);
+  font-size: 1.2rem;
+}
+
+.sis-search__box button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.sis-search__count {
+  color: var(--faint);
+  font-size: 0.82rem;
+}
+
+/* ----- Table ----- */
+.sis-table-wrap {
+  overflow-x: auto;
+}
+
+.sis-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.94rem;
+}
+
+.sis-table th {
+  padding: 12px;
+  border-bottom: 1px solid var(--line-strong);
+  color: var(--faint);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.sis-table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--line);
+  color: var(--text);
+  vertical-align: middle;
+}
+
+.sis-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.sis-table tbody tr:hover {
+  background: rgba(133, 87, 255, 0.07);
+}
+
+.sis-table td:first-child {
+  color: var(--faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.sis-table td:nth-child(2) {
+  color: #fff;
+  font-weight: 600;
+}
+
+.sis-table__email {
+  min-width: 190px;
+  color: var(--muted);
+  overflow-wrap: break-word;
+}
+
+.sis-table td:nth-child(5) {
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.sis-table__actions {
+  display: flex;
+  gap: 8px;
+}
+
+.sis-table__actions .btn {
+  min-height: 36px;
+  padding: 0 16px;
+  font-size: 0.85rem;
+}
+
+/* ----- Empty / error states ----- */
+.sis-state {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 56px 20px;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-md);
+  color: var(--muted);
+  text-align: center;
+}
+
+.sis-state h4 {
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+}
+
+.sis-state .btn {
+  margin-top: 10px;
+}
+
+.sis-state--error {
+  border-color: rgba(255, 122, 144, 0.45);
+  background: rgba(255, 122, 144, 0.05);
+}
+
+.sis-state--error h4 {
+  color: var(--danger);
+}
+
+.delete-summary {
+  display: grid;
+  gap: 2px;
+  padding: 14px 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.04);
+  font-size: 0.92rem;
+}
+
+.delete-summary strong {
+  color: #fff;
+  font-size: 1.05rem;
+}
+
+/* ----- Responsive ----- */
+@media (max-width: 1000px) {
+  .sis-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sis-form {
+    position: static;
+  }
+}
+
+@media (max-width: 720px) {
+  .sis {
+    padding-top: calc(var(--nav-height) + 36px);
+  }
+
+  .sis-stats {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .sis-card {
+    padding: 20px;
+  }
+
+  .sis-search {
+    width: 100%;
+  }
+
+  /* Table rows become stacked cards on phones */
+  .sis-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .sis-table,
+  .sis-table tbody,
+  .sis-table tr,
+  .sis-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .sis-table tr {
+    margin-bottom: 14px;
+    padding: 8px 4px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .sis-table td {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 8px 12px;
+    border-bottom: none;
+    text-align: right;
+  }
+
+  .sis-table td::before {
+    content: attr(data-label);
+    flex: none;
+    color: var(--faint);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: left;
+  }
+
+  .sis-table td:nth-child(5) {
+    white-space: normal;
+  }
+}

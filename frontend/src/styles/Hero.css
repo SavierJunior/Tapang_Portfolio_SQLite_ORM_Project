@@ -1,0 +1,318 @@
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
+  padding: calc(var(--nav-height) + 56px) 28px 80px;
+  overflow: hidden;
+  scroll-margin-top: 0;
+}
+
+.hero__glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+}
+
+.hero__glow--one {
+  top: -120px;
+  right: -80px;
+  width: 520px;
+  height: 520px;
+  background: rgba(111, 76, 255, 0.28);
+}
+
+.hero__glow--two {
+  bottom: -160px;
+  left: -140px;
+  width: 460px;
+  height: 460px;
+  background: rgba(58, 124, 255, 0.16);
+}
+
+.hero__grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000, transparent 75%);
+  pointer-events: none;
+}
+
+.hero__inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: 64px;
+  width: 100%;
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+.hero__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 26px;
+  padding: 8px 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.hero__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 0 4px rgba(98, 243, 174, 0.18);
+}
+
+.hero h1 {
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: clamp(2.7rem, 5.6vw, 4.8rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.05em;
+}
+
+.hero__description {
+  max-width: 540px;
+  margin-top: 28px;
+  color: var(--muted);
+  font-size: 1.12rem;
+  line-height: 1.75;
+}
+
+.hero__description strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 38px;
+}
+
+.hero__highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 44px;
+}
+
+.hero__highlights li {
+  padding: 8px 16px;
+  border: 1px solid var(--line);
+  border-radius: 100px;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+/* ----- Portrait ----- */
+.hero__profile {
+  position: relative;
+  display: grid;
+  place-items: center;
+  justify-self: center;
+  width: min(100%, 520px);
+  aspect-ratio: 1;
+}
+
+.orbit {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(133, 87, 255, 0.35);
+}
+
+.orbit--outer {
+  inset: 0;
+  border-style: dashed;
+  animation: orbit-spin 60s linear infinite;
+}
+
+.orbit--inner {
+  inset: 8%;
+  border-color: rgba(94, 223, 255, 0.2);
+}
+
+.portrait {
+  position: relative;
+  width: 74%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 1px solid rgba(183, 163, 255, 0.45);
+  border-radius: 50%;
+  background: #1a1536;
+  box-shadow: 0 30px 80px rgba(80, 50, 200, 0.45), 0 0 0 10px rgba(133, 87, 255, 0.08);
+}
+
+.portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 18%;
+}
+
+/* Multiplies the photo's white backdrop into violet while leaving the face untouched. */
+.portrait__tint {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 52% 48% at 50% 42%, #fff 0 62%, #a893ff 100%);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.float-card {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px 12px 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: rgba(16, 16, 34, 0.82);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+}
+
+.float-card > span {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  background: linear-gradient(135deg, var(--purple), var(--blue));
+  color: #fff;
+}
+
+.float-card small {
+  display: block;
+  color: var(--faint);
+  font-size: 0.72rem;
+}
+
+.float-card strong {
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+}
+
+.float-card--top {
+  top: 8%;
+  right: -2%;
+}
+
+.float-card--bottom {
+  bottom: 14%;
+  left: -4%;
+}
+
+.portrait-name {
+  position: absolute;
+  bottom: 2%;
+  right: 8%;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  border-radius: 100px;
+  background: #fff;
+  color: #14122b;
+}
+
+.portrait-name strong {
+  font-family: var(--font-display);
+}
+
+.portrait-name span {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+@keyframes orbit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 960px) {
+  .hero {
+    min-height: auto;
+    padding: calc(var(--nav-height) + 36px) 20px 72px;
+  }
+
+  .hero__inner {
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+
+  .hero__profile {
+    width: min(100%, 420px);
+  }
+}
+
+@media (max-width: 520px) {
+  .hero__actions .btn {
+    flex: 1 1 100%;
+  }
+
+  .float-card--top {
+    right: 0;
+  }
+
+  .float-card--bottom {
+    left: 0;
+  }
+
+  .float-card {
+    padding: 8px 14px 8px 8px;
+  }
+
+  .portrait-name {
+    right: 4%;
+  }
+}
+
+/* Profile picture served from the database settings */
+.portrait--loading {
+  background: linear-gradient(110deg, #1a1536 30%, #261f4d 50%, #1a1536 70%);
+  background-size: 200% 100%;
+  animation: portrait-shimmer 1.4s linear infinite;
+}
+
+.portrait img {
+  animation: portrait-in 0.6s ease both;
+}
+
+/* An uploaded photo keeps its own colours (the violet tint was made for the original photo's white backdrop) */
+.portrait--custom .portrait__tint {
+  display: none;
+}
+
+@keyframes portrait-shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes portrait-in {
+  from {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+}

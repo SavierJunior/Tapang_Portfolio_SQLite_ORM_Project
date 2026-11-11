@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Private settings (only .env.example is committed)
+.env
+.env.*
+!.env.example
+
+# SQLite database files - your personal data, never commit them.
+# The database is re-created from prisma/migrations with "npm run prisma:migrate".
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+*.sqlite-journal
+*-wal
+*-shm
+
+# Uploaded files are private data - keep the folders (.gitkeep), ignore the contents
+uploads/*/*
+!uploads/*/.gitkeep
+
+# Logs / temporary files
+*.log
+npm-debug.log*
+*.tmp
+.tmp/

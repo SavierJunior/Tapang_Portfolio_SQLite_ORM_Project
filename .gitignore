@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+backend/node_modules/
+
+# Private environment files (never commit real passwords or the JWT secret)
+.env
+.env.*
+!.env.example
+frontend/.env
+backend/.env
+
+# SQLite database files (personal data - GitHub is for source code, not a live database)
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+*.sqlite-journal
+*-wal
+*-shm
+
+# Uploaded files are private data (folders are kept via .gitkeep)
+backend/uploads/*/*
+!backend/uploads/*/.gitkeep
+
+# Build output / caches / temporary files
+dist/
+dist-ssr/
+.vite/
+coverage/
+*.log
+npm-debug.log*
+*.tmp
+.tmp/
+
+# Editor / OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db

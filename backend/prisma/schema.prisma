@@ -1,0 +1,120 @@
+// Prisma ORM 6 schema - SQLite (local file database, no XAMPP / MySQL server needed)
+//
+// The database is ONE file: backend/portfolio.db
+// DATABASE_URL in backend/.env is "file:../portfolio.db". Prisma resolves a relative SQLite path
+// from THIS folder (backend/prisma), so "../portfolio.db" points to backend/portfolio.db.
+//
+// SQLite notes:
+//   - SQLite has no VARCHAR(n)/TEXT/DATE column sizes, so the old MySQL @db.* annotations were removed.
+//     Maximum lengths are enforced by the API validation instead (src/utils/validate.js, routes/*).
+//   - Prisma 6 supports enums on SQLite. They are stored as TEXT, so every route also checks the
+//     allowed values (DRAFT/PUBLISHED, IMAGE/VIDEO, PENDING/READ/REPLIED/ARCHIVED) before saving.
+//   - Dates are stored as readable Philippine time text ("2026-11-10 22:30:15"), not as numbers.
+//     New rows get the time from the column default; prisma.js updates `updatedAt` on every change.
+//   - Text comparisons are case-sensitive in SQLite, so usernames and emails are always saved in lowercase.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum ProjectStatus {
+  DRAFT
+  PUBLISHED
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+}
+
+enum MessageStatus {
+  PENDING
+  READ
+  REPLIED
+  ARCHIVED
+}
+
+// Administrator account. Created only by the seed script - there is no public registration.
+model Admin {
+  id           Int    @id @default(autoincrement())
+  name         String // max 120 (checked by the seed)
+  username     String @unique // max 60, lowercase
+  email        String @unique // max 191, lowercase
+  passwordHash String // bcrypt hash - the plain password is never stored
+  createdAt    String @default(dbgenerated("(strftime('%Y-%m-%d %H:%M:%S', 'now', '+8 hours'))")) // Philippine time, e.g. "2026-11-10 22:30:15"
+  updatedAt    String @default(dbgenerated("(strftime('%Y-%m-%d %H:%M:%S', 'now', '+8 hours'))")) // set on every change by prisma.js
+}
+
+model Project {
+  id             Int            @id @default(autoincrement())
+  title          String // max 150
+  description    String // max 5000
+  category       String // max 100
+  toolsUsed      String         @default("") // comma separated list, max 500
+  projectLink    String? // max 500
+  completionDate String? // plain calendar date "YYYY-MM-DD", e.g. "2026-11-09" (readable in any database viewer)
+  status         ProjectStatus  @default(DRAFT)
+  sortOrder      Int            @default(0)
+  createdAt      String         @default(dbgenerated("(strftime('%Y-%m-%d %H:%M:%S', 'now', '+8 hours'))")) // Philippine time, e.g. "2026-11-10 22:30:15"
+  updatedAt      String         @default(dbgenerated("(strftime('%Y-%m-%d %H:%M:%S', 'now', '+8 hours'))")) // set on every change by prisma.js
+  media          ProjectMedia[]
+
+  @@index([status, sortOrder])
+}
+
+// File metadata only. The files themselves live in backend/uploads/projects.
+model ProjectMedia {
+  id           Int       @id @default(autoincrement())
+  projectId    Int
+  originalName String
+  storedName   String    @unique
+  mimeType     String
+  sizeBytes    Int
+  filePath     String // relative to backend/uploads, e.g. projects/abc.webp
+  mediaType    MediaType
+  isCover      Boolean   @default(false)
+  uploadedAt   String    @default(dbgenerated("(strftime('%Y-%m-%d %H:%M:%S', 'now', '+8 hours'))")) // Philippine time, e.g. "2026-11-10 22:30:15"
+  project      Project   @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@index([projectId])
+}
+
+// Single-record configuration table: the only row always has id = 1.
+// NULL file fields mean "use the original bundled file" (frontend/public/profile.jpg, resume.pdf).
+model PortfolioSettings {
+  id                       Int     @id @default(1)
+  profileImagePath         String?
+  profileImageOriginalName String?
+  profileImageMimeType     String?
+  profileImageSizeBytes    Int?
+  resumeFilePath           String?
+  resumeOriginalName       String?
+  resumeMimeType           String?
+  resumeSizeBytes          Int?
+  resumeUploadedAt         String?
+  // Set by the seed after the three sample projects are inserted the first time, so a sample
+  // project you delete in the Admin Dashboard is not re-created when you run the seed again.
+  sampleProjectsSeededAt   String?
+  updatedAt                String  @default(dbgenerated("(strftime('%Y-%m-%d %H:%M:%S', 'now', '+8 hours'))")) // set on every change by prisma.js
+}
+
+model Message {
+  id         Int           @id @default(autoincrement())
+  senderName String // max 120
+  username   String? // max 60
+  email      String // max 191, lowercase
+  subject    String // max 200
+  content    String // max 5000
+  status     MessageStatus @default(PENDING)
+  adminReply String? // max 5000
+  repliedAt  String?
+  createdAt  String        @default(dbgenerated("(strftime('%Y-%m-%d %H:%M:%S', 'now', '+8 hours'))")) // Philippine time, e.g. "2026-11-10 22:30:15"
+  updatedAt  String        @default(dbgenerated("(strftime('%Y-%m-%d %H:%M:%S', 'now', '+8 hours'))")) // set on every change by prisma.js
+
+  @@index([status, createdAt])
+}

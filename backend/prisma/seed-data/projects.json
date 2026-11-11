@@ -1,0 +1,23 @@
+[
+  {
+    "title": "LikhaHub",
+    "category": "Academic Project",
+    "description": "A creative collaboration and production management portal concept for animation and motion graphics.",
+    "toolsUsed": "UI/UX, Web System, Creative",
+    "sortOrder": 1
+  },
+  {
+    "title": "Motion Graphics Project",
+    "category": "Creative Project",
+    "description": "A visual project exploring motion, typography, transitions, composition and digital storytelling.",
+    "toolsUsed": "Motion, Animation, Visual",
+    "sortOrder": 2
+  },
+  {
+    "title": "3D Creative Project",
+    "category": "Creative Project",
+    "description": "A 3D-focused creative project involving modeling, composition, lighting and visual presentation.",
+    "toolsUsed": "3D, Design, Visual",
+    "sortOrder": 3
+  }
+]
